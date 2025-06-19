@@ -1,0 +1,10 @@
+package com.example.demo.controller;
+
+@Controller
+public class HomeController {
+
+    @GetMapping("/")
+    public String home() {
+        return "reviewForm"; // reviewForm.html を表示
+    }
+}

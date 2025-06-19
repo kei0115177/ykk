@@ -1,0 +1,32 @@
+package com.example.demo.Entity;
+
+import java.time.LocalDate;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Table(name = "review")
+@Getter
+@Setter
+public class review {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Integer age;
+    private String gender;
+    private String category;
+    private String product;
+    private Integer star;
+    private String review;
+    private String sentiment;
+    private LocalDate date;
+}

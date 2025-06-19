@@ -1,0 +1,28 @@
+package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.example.demo.Entity.Review;
+import com.example.demo.repository.ReviewRepository;
+
+
+@Controller
+public class reviewController {
+
+    private final ReviewRepository reviewRepository;
+
+    public ReviewController(ReviewRepository reviewRepository) {
+        this.reviewRepository = reviewRepository;
+    }
+
+    @GetMapping("/reviews")
+    public String showReviewList(Model model) {
+        List<Review> reviews = reviewRepository.findAll();
+        model.addAttribute("reviews", reviews); // ← ここが重要！
+        return "reviewList";
+    }
+}

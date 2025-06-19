@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>レビュー一覧</title>
+</head>
+<body>
+    <h1>レビュー一覧</h1>
+
+    <!-- 絞り込みボタン -->
+    <div>
+        <h3>カテゴリ別絞り込み</h3>
+        <button>家電</button>
+        <button>日用品</button>
+        <button>食品</button>
+		<button>ファッション</button>
+		<button>家具</button>
+		<button>その他</button>
+    </div>
+
+    <div>
+        <h3>感情別絞り込み</h3>
+        <button>ポジティブ</button>
+        <button>ニュートラル</button>
+        <button>ネガティブ</button>
+    </div>
+
+    <br/>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>年齢</th>
+                <th>性別</th>
+                <th>カテゴリ</th>
+                <th>商品名</th>
+                <th>星</th>
+                <th>レビュー</th>
+                <th>感情</th>
+                <th>日付</th>
+                <th>操作</th> <!-- 削除ボタン用 -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="review : ${reviews}">
+                <td th:text="${review.id}"></td>
+                <td th:text="${review.age}"></td>
+                <td th:text="${review.gender}"></td>
+                <td th:text="${review.category}"></td>
+                <td th:text="${review.product}"></td>
+                <td th:text="${review.star} ?: '-'"></td>
+                <td th:text="${review.review}"></td>
+                <td th:text="${review.sentiment}"></td>
+                <td th:text="${review.date}"></td>
+                <td>
+                    <form method="post" th:action="@{'/reviews/delete/' + ${review.id}}">
+                        <button type="submit">削除</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

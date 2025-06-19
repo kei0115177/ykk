@@ -1,0 +1,46 @@
+package com.example.demo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+@Controller
+public class ReviewController {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    // フォーム表示
+    @GetMapping("/review")
+    public String showForm() {
+        return "review_form"; // templates/review_form.html を返す
+    }
+
+    // フォーム送信処理
+    @PostMapping("/submit-review")
+    public String submitReview(
+        @RequestParam(required = false) Integer age,
+        @RequestParam String gender,
+        @RequestParam String product,
+        @RequestParam int star,
+        @RequestParam String review,
+        @RequestParam String date,
+        RedirectAttributes redirectAttributes
+    ) {
+        // カテゴリと感情は別処理で分類される想定のため、仮値を入れる
+        String category = "未分類";
+        String sentiment = "Pending";
+
+        String sql = "INSERT INTO reviews (age, gender, category, product, star, review, sentiment, date) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        jdbcTemplate.update(sql, age, gender, category, product, star, review, sentiment, date);
+
+        redirectAttributes.addFlashAttribute("message", "レビューを登録しました。ありがとうございました。");
+        return "redirect:/review";
+    }
+}

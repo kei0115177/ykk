@@ -1,0 +1,27 @@
+package com.example.demo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+@Controller
+@Controller
+public class ReviewController {
+
+    private final ReviewRepository reviewRepository;
+
+    public ReviewController(ReviewRepository reviewRepository) {
+        this.reviewRepository = reviewRepository;
+    }
+
+    @GetMapping("/reviews")
+    public String showReviews(Model model) {
+        List<Review> reviewList = reviewRepository.findAll();
+        model.addAttribute("reviews", reviewList);
+        return "reviewList"; // ← HTMLファイル名
+    }
+}
