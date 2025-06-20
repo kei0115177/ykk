@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<title>レビュー投稿フォーム</title>
+</head>
+
+<body>
+	<h1>レビュー投稿フォーム</h1>
+	<form action="/submit" method="post">
+		<label>年齢：<input type="number" name="age" min="0" required></label><br><br>
+
+		<label>性別：
+			<select name="gender" required>
+				<option value="">選択してください</option>
+				<option value="男性">男性</option>
+				<option value="女性">女性</option>
+			</select>
+		</label><br><br>
+
+		<label>商品名：<input type="text" name="product" required></label><br><br>
+
+		<label>評価：
+			<select name="star">
+				<option value="">未選択</option>
+				<option value="1">★1</option>
+				<option value="2">★2</option>
+				<option value="3">★3</option>
+				<option value="4">★4</option>
+				<option value="5">★5</option>
+			</select>
+		</label><br><br>
+
+		<label>レビュー内容：<br>
+			<textarea name="review" rows="5" cols="40" required></textarea>
+		</label><br><br>
+
+		<button type="submit">投稿する</button>
+	</form>
+</body>
+
+</html>
